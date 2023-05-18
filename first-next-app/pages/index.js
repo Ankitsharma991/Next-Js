@@ -1,7 +1,7 @@
 //our-domain.com/
 import React from "react";
-import Layout from "../components/layout/Layout";
 import MeetupList from "../components/meetups/MeetupList";
+
 const DUMMY_MEETUPS = [
   {
     id: "m1",
@@ -37,11 +37,29 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-function HomePage() {
-  return (
-    <Layout>
-      <MeetupList meetups={DUMMY_MEETUPS} />
-    </Layout>
-  );
+function HomePage(props) {
+  return <MeetupList meetups={props.meetups} />;
 }
+
+export async function getStaticProps() {
+  // fetch data from an API
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 1,
+  };
+}
+
+// export async function getServerSideProps(context) {
+//   // no need to revalidate this function
+//   const req = context.req;
+//   const res = context.res;
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//     },
+//   };
+// }
+
 export default HomePage;

@@ -10,6 +10,7 @@ function NewMeetupForm(props) {
   const descriptionInputRef = useRef();
 
   function submitHandler(event) {
+    console.log(props)
     event.preventDefault();
 
     const enteredTitle = titleInputRef.current.value;
